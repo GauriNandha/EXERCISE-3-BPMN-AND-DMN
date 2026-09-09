@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="Definitions_LeaveDMN" name="Leave Approval" namespace="http://xyz.example/leave">
+  <decision id="LeaveApprovalDecision" name="Leave Approval Decision">
+    <decisionTable id="DecisionTable_Leave" hitPolicy="FIRST">
+      <input id="Input_LeaveType" label="Leave Type"><inputExpression id="Expr_LeaveType" typeRef="string"><text>leaveType</text></inputExpression></input>
+      <input id="Input_Days" label="Requested Days"><inputExpression id="Expr_Days" typeRef="number"><text>requestedDays</text></inputExpression></input>
+      <input id="Input_Balance" label="Available Balance"><inputExpression id="Expr_Balance" typeRef="number"><text>availableBalance</text></inputExpression></input>
+      <output id="Output_Decision" label="Approval Decision" name="approvalDecision" typeRef="string"/>
+      <rule id="Rule_1"><inputEntry id="R1_1"><text>"Sick"</text></inputEntry><inputEntry id="R1_2"><text>&lt;= 3</text></inputEntry><inputEntry id="R1_3"><text>&gt;= requestedDays</text></inputEntry><outputEntry id="R1_O"><text>"AUTO_APPROVE"</text></outputEntry></rule>
+      <rule id="Rule_2"><inputEntry id="R2_1"><text>"Casual"</text></inputEntry><inputEntry id="R2_2"><text>-</text></inputEntry><inputEntry id="R2_3"><text>&gt;= requestedDays</text></inputEntry><outputEntry id="R2_O"><text>"MANAGER_APPROVAL"</text></outputEntry></rule>
+      <rule id="Rule_3"><inputEntry id="R3_1"><text>"Earned"</text></inputEntry><inputEntry id="R3_2"><text>-</text></inputEntry><inputEntry id="R3_3"><text>&gt;= requestedDays</text></inputEntry><outputEntry id="R3_O"><text>"MANAGER_APPROVAL"</text></outputEntry></rule>
+      <rule id="Rule_4"><inputEntry id="R4_1"><text>"Sick"</text></inputEntry><inputEntry id="R4_2"><text>&gt; 3</text></inputEntry><inputEntry id="R4_3"><text>&gt;= requestedDays</text></inputEntry><outputEntry id="R4_O"><text>"MANAGER_APPROVAL"</text></outputEntry></rule>
+    </decisionTable>
+  </decision>
+</definitions>
